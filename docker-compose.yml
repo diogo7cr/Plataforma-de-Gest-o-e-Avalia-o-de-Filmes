@@ -1,0 +1,8 @@
+services:
+  app:
+    image: pswii-app
+    container_name: laravel_pswii
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
