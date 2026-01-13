@@ -1,63 +1,200 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Movie Diogo - Movie Review Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Description
 
-## About Laravel
+Movie Diogo is a web-based platform built with Laravel that allows users to discover, rate, and share opinions about movies. The application integrates with The Movie Database (TMDb) API to fetch movie data and provides features for user authentication, movie reviews, comments, favorites, and administrative management. This project was developed as an academic assignment to demonstrate full-stack web development skills using modern PHP frameworks and frontend technologies.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Technologies Used
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Backend**: PHP 8.2, Laravel 12.0
+- **Database**: SQLite (configured for development; can be changed to MySQL/PostgreSQL in production)
+- **Frontend**: HTML, CSS, JavaScript, Tailwind CSS, Alpine.js
+- **Build Tools**: Vite, npm
+- **Authentication**: Laravel Breeze
+- **Testing**: PHPUnit
+- **Containerization**: Docker, Docker Compose
+- **External API**: TMDb API for movie data
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Requirements
 
-## Learning Laravel
+- PHP 8.2 or higher
+- Composer
+- Node.js (version 18 or higher)
+- npm
+- SQLite (or another database supported by Laravel)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Installation Instructions
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Follow these steps to set up the project locally:
 
-## Laravel Sponsors
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd PSWII
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. **Install PHP dependencies**:
+   ```bash
+   composer install
+   ```
 
-### Premium Partners
+3. **Configure environment**:
+   - Copy the `.env.example` file to `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Edit `.env` and configure the following settings:
+     - Database connection (default is SQLite)
+     - TMDb API key (obtain from [TMDb](https://www.themoviedb.org/settings/api))
+     - Application URL and other environment variables
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+4. **Generate application key**:
+   ```bash
+   php artisan key:generate
+   ```
 
-## Contributing
+5. **Run database migrations**:
+   ```bash
+   php artisan migrate
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+6. **Seed the database (optional)**:
+   ```bash
+   php artisan db:seed
+   ```
 
-## Code of Conduct
+7. **Install Node.js dependencies**:
+   ```bash
+   npm install
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+8. **Build frontend assets**:
+   ```bash
+   npm run build
+   ```
 
-## Security Vulnerabilities
+9. **Start the development server**:
+   ```bash
+   php artisan serve
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+The application will be available at `http://localhost:8000`.
 
-## License
+## Docker
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Requirements
+- Docker
+- Docker Compose
 
+### Running with Docker
+To run the application using Docker, execute the following command:
+```bash
+docker compose up --build
+```
 
+**Note**: When using Docker, do not run `php artisan serve` as the application is served directly through the Apache container on port 8000.
+
+## .env Configuration
+
+Ensure your `.env` file includes the following key configurations:
+
+```env
+APP_NAME="Movie Diogo"
+APP_ENV=local
+APP_KEY=base64:your-generated-key
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=sqlite
+DB_DATABASE=/absolute/path/to/database/database.sqlite
+
+TMDB_API_KEY=your-tmdb-api-key-here
+```
+
+## Running Migrations and Seeders
+
+After configuring the database in `.env`:
+
+1. **Run migrations**:
+   ```bash
+   php artisan migrate
+   ```
+
+2. **Run seeders** (to populate with sample data):
+   ```bash
+   php artisan db:seed
+   ```
+
+## Main Features
+
+- **Movie Discovery**: Browse and search movies from TMDb
+- **User Authentication**: Registration, login, and profile management
+- **Movie Ratings**: Users can rate movies on a scale
+- **Comments**: Authenticated users can leave comments on movies
+- **Favorites**: Users can add/remove movies to/from their favorites list
+- **Admin Panel**: Administrative interface for managing users, movies, and comments
+- **File Uploads**: Admins can upload custom movie posters
+- **CSV Export**: Admins can export user and movie data to CSV files
+
+## User Profiles
+
+### Regular User
+- View movies and their details
+- Search and filter movies
+- Register and authenticate
+- Rate movies (1-10 scale)
+- Leave comments on movies
+- Add/remove movies from favorites
+- Edit profile information
+
+### Admin User
+- All regular user permissions
+- Access to admin dashboard
+- Manage users (view, toggle admin status, delete)
+- Manage movies (create, edit, delete, upload posters)
+- Manage comments (view, delete)
+- Export data to CSV (users and movies)
+
+## File Uploads
+
+The application supports uploading custom movie posters for admin users. Uploaded images are stored locally in the `public/uploads/posters/` directory.
+
+**Important Note**: Uploaded images are stored locally and are not versioned in the GitHub repository. They are intended for local development and testing purposes only.
+
+## Project Structure
+
+```
+PSWII/
+├── app/
+│   ├── Http/Controllers/          # Controllers for handling requests
+│   ├── Models/                    # Eloquent models (User, Movie, Rating, etc.)
+│   └── Providers/                 # Service providers
+├── bootstrap/                     # Laravel bootstrap files
+├── config/                        # Configuration files
+├── database/
+│   ├── factories/                 # Model factories
+│   ├── migrations/                # Database migrations
+│   └── seeders/                   # Database seeders
+├── public/                        # Public assets and uploads
+│   ├── uploads/posters/           # Uploaded movie posters
+│   └── ...
+├── resources/
+│   ├── js/                        # JavaScript files
+│   ├── views/                     # Blade templates
+│   └── ...
+├── routes/                        # Route definitions
+├── storage/                       # File storage
+├── tests/                         # Unit and feature tests
+├── vendor/                        # Composer dependencies
+├── composer.json                  # PHP dependencies
+├── package.json                   # Node.js dependencies
+├── docker-compose.yml             # Docker configuration
+├── Dockerfile                     # Docker image definition
+└── README.md                      # This file
+```
+
+## Test Credentials
+
+There are no predefined test credentials in this project. Users must register through the application interface to create accounts. The database seeder creates a sample user with email `test@example.com`, but no password is set.
 
 
